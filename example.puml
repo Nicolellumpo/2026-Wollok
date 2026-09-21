@@ -1,0 +1,24 @@
+@startuml  
+' Definición de clases/objetos
+
+class pepita {
+  - energia 
+  + vuela(minutos)
+  + come(gramos)
+  + duerme(horas)
+  + comeYDuerme(gramos , horas)
+  + estaFeliz() 
+}
+
+class azul {
+  - energia 
+  + vuela(minutos)
+  + estaFeliz()
+}
+
+class rosa {
+  + vuela(energia) 
+  + estaFeliz() 
+}
+
+@enduml

@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "wollokVersion": "4.2.3",
     "author": "LENOVO",
-    "license": "ISC"
-  }
-  
+    "license": "ISC",
+    "plantuml.java": "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.4.101-hotspot\\bin\\java.exe",
+    "plantuml.graphvizDot": "C:\\Program Files\\Graphviz\\bin\\dot.exe"
+}
