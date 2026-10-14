@@ -1,9 +1,13 @@
-import example.pepita
+import prueba.*
 
 describe "group of tests for pepita" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energia())
+  test "pepita arranca con energia al tope" {
+    assert.equals(100, pepita2.energia())
+  }
+
+  test "pepita2 arranca con fuerte" {
+    assert.that(pepita2.esFuerte())
   }
 
 }
