@@ -1,0 +1,106 @@
+import clase3balde.*
+
+describe "clase 3" {
+  var balde
+
+  method initialize() {
+    balde = new Balde(
+      pesoUnitario = 10,
+      unidades = 0,
+      pesoMaximo = 1000
+    )
+  }
+
+  method cargarBalde(cantidad) {
+    balde.agregarUnidades(cantidad)
+  }
+
+  test "un balde sin unidades tiene peso 0" {
+    // Assert
+    assert.equals(0, balde.pesoTotal())
+  }
+
+  test "Al agregar unidades de contenido de un balde se calcula su peso de forma correcta" {
+    // Act -> la acción en concreto que se produce
+    balde.agregarUnidades(5)
+
+    // Assert -> estado final esperado del programa
+    assert.equals(50, balde.pesoTotal())
+  }
+
+  test "Al quitar unidades de contenido de un balde se calcula su peso de forma correcta" {
+    // Arrange
+    self.cargarBalde(10)
+
+    // Act
+    balde.sacarUnidades(5)
+
+    // Assert
+    assert.equals(50, balde.pesoTotal())
+  }
+
+  test "Se pueden agregar unidades hasta alcanzar exactamente el peso máximo" {
+    // Arrange
+    self.cargarBalde(50)
+
+    // Act
+    balde.agregarUnidades(50)
+
+    // Assert
+    assert.equals(1000, balde.pesoTotal())
+  }
+
+  test "Al sacar todas las unidades el balde queda con peso 0" {
+    // Arrange
+    self.cargarBalde(50)
+
+    // Act
+    balde.sacarUnidades(50)
+
+    // Assert
+    assert.equals(0, balde.pesoTotal())
+  }
+
+  test "No se pueden agregar cantidades negativas y el balde conserva su contenido" {
+    self.cargarBalde(10)
+
+    assert.throwsExceptionWithMessage("La cantidad que ingresaste debe ser positiva.", {
+      balde.agregarUnidades(-5)
+    })
+
+    assert.equals(100, balde.pesoTotal())
+  }
+
+  test "No se pueden sacar cantidades negativas y el balde conserva su contenido" {
+    self.cargarBalde(10)
+
+    assert.throwsExceptionWithMessage("La cantidad que ingresaste debe ser positiva.", {
+      balde.sacarUnidades(-5)
+    })
+
+    assert.equals(100, balde.pesoTotal())
+  }
+
+  test "No se pueden agregar unidades tal que se supere el peso máximo" {
+    // Arrange
+    self.cargarBalde(50)
+
+    const cantidad = 101
+
+    // Act & Assert
+    assert.throwsExceptionWithMessage("Podés agregar solamente hasta 50 unidades más. Las 101 unidades que querés agregar exceden el peso máximo de 1000.", { balde.agregarUnidades(cantidad) })
+
+  }
+
+  test "No se pueden sacar más unidades de las que se disponen" {
+    // Arrange
+    self.cargarBalde(50)
+
+    const cantidad = 101
+
+    // Act & Assert
+    assert.throwsExceptionWithMessage("Solamente puede sacar hasta 50 unidades. Las 101 unidades exceden el límite.", { balde.sacarUnidades(cantidad) })
+    
+  }
+
+}

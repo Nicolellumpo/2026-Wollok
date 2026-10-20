@@ -41,10 +41,6 @@ class Torcaza inherits Ave {
     } 
 } 
 
-
-
-
-
 // -------------------------------------------------------------------------------------------------------------------
 //                                        Ejemplo en clase
 // -------------------------------------------------------------------------------------------------------------------
@@ -99,6 +95,7 @@ class CuentaRemunerada inherits Cuenta {
 
 object cuentaFede inherits Cuenta (saldo = 1000) {
   const limite = 500
+
   override method transferir(monto){
     if (monto > limite) throw new DomainException(message ="usted no puede superar el límite de $" + limite.toString())
     super(monto)

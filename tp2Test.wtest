@@ -1,0 +1,230 @@
+import tp2.*
+
+//                                          ENTREGA 1 - TP OBJETOS
+describe "La bebida" {
+  test "Barriles necesarios para 81 invitados" {
+    assert.equals(3, barril.barrilesPara(81))
+  }
+  test "Barriles necesarios para 80 invitados" {
+    assert.equals(2, barril.barrilesPara(80))
+  }
+   test "Barriles necesarios para 79 invitados" {
+    assert.equals(2, barril.barrilesPara(79))
+  }
+  test "Costo barriles para 10 invitados" {
+    assert.equals(300, barril.costoBebida(10))
+  }
+   test "Costo barriles para 80 invitados" {
+    assert.equals(600, barril.costoBebida(80))
+  }
+}
+describe "Doña Rosa" {
+  test "Cobra de servicio 800 por 40 invitados" {
+    assert.equals(800, doniaRosa.costoServicio(40))
+  }
+  test "Doña Rosa cobra en total 1100 por 40 invitados" {
+    assert.equals(1100, doniaRosa.precioPor(object { method cantidadInvitados() = 40 }))
+  }
+}
+describe "El bodegon"{
+ test "cobro por 20 invitados"{
+    assert.equals(900, elBodegon.costoServicio(20))
+  }
+  test "cobro por 30 invitados "{
+    assert.equals(1075,elBodegon.costoServicio (30))
+  }
+}
+describe "Pizzas Nico" {
+  test "cobro por 42 invitados" {
+    assert.equals(1750, pizzasNico.costoServicio(42))
+  }
+  test "cobro por 40 invitados" {
+    assert.equals(1400, pizzasNico.costoServicio(40))
+  }
+  test "cobro total por 40 invitados" {
+    assert.equals(1700, pizzasNico.precioPor(object { method cantidadInvitados() = 40 }))
+  }
+}
+//                                          ENTREGA 2 - TP OBJETOS
+ describe "Fiestas" {
+  test "Fiesta de Isabella: 42 invitados y no es complicada ni larga" {
+    const fiesta = fixtureCompartido.nuevaFiestaIsabella()
+    assert.equals(42, fiesta.cantidadInvitados())
+    assert.notThat(fiesta.esComplicada())
+    assert.notThat(fiesta.esLarga())
+  }
+  test "Fiesta de Milena: 20 invitados y es larga" {
+    const fiesta = fixtureCompartido.nuevaFiestaMilena()
+    assert.equals(20, fiesta.cantidadInvitados())
+    assert.that(fiesta.esLarga())
+  }
+  test "Fiesta de Damián: 76 invitados y es complicada" {
+    const fiesta = fixtureCompartido.nuevaFiestaDamian()
+    assert.equals(76, fiesta.cantidadInvitados())
+    assert.that(fiesta.esComplicada())
+  }
+ }
+ describe "Proveedores con fiestas de resguardo" {
+    test "Los Tilos cobra 3000 por una fiesta de 3 sectores y 2 horas" {
+      const fiesta = object { method cantidadDeSectores() = 3 method duracion() = 2 }
+      assert.equals(3000, losTilos.precioPor(fiesta))
+    }
+    test "Marta cobra 1800 por una fiesta de 3 sectores no complicada" {
+      const fiesta = object { method cantidadDeSectores() = 3 method esComplicada() = false }
+      assert.equals(1800, marta.precioPor(fiesta))
+    }
+    test "Marta cobra 3600 por una fiesta complicada de 5 sectores" {
+      const fiesta = object { method cantidadDeSectores() = 5 method esComplicada() = true }
+      assert.equals(3600, marta.precioPor(fiesta))
+    }
+    test "Los Pibes cobran 600 por una fiesta de 3 sectores y 2 horas" {
+      const fiesta = object { method cantidadDeSectores() = 3 method duracion() = 2 }
+      assert.equals(600, losPibes.precioPor(fiesta))
+    }
+    test "Escudo cobra 300 por una fiesta de 3 sectores no larga" {
+      const fiesta = object { method cantidadDeSectores() = 3 method esLarga() = false }
+      assert.equals(300, escudo.precioPor(fiesta))
+    }
+    test "Escudo cobra 330 por una fiesta de 3 sectores larga" {
+      const fiesta = object { method cantidadDeSectores() = 3 method esLarga() = true }
+      assert.equals(330, escudo.precioPor(fiesta))
+    }
+    test "Doña Rosa cobra 1100 por una fiesta de 40 invitados" {
+      assert.equals(1100, doniaRosa.precioPor(object{method cantidadInvitados() = 40}))
+    }
+    test "El Bodegón cobra 1075 por una fiesta de 30 invitados" {
+      assert.equals(1075, elBodegon.costoServicio(30))
+    }
+    test "Pizzas Nico cobra 2350 por una fiesta de 42 invitados" {
+      assert.equals(2350, pizzasNico.precioPor(object { method cantidadInvitados() = 42 }))
+    }
+}
+ describe "Proveedores con las fiestas de los clientes" {
+  const fiestaIsabella = fixtureCompartido.nuevaFiestaIsabella()
+  const fiestaMilena   = fixtureCompartido.nuevaFiestaMilena()
+  const fiestaDamian   = fixtureCompartido.nuevaFiestaDamian()
+
+    test "Los Tilos cobra 4000 por la fiesta de Isabella" {
+      assert.equals(4000, losTilos.precioPor(fiestaIsabella))
+    }
+    test "Marta cobra 1200 por la fiesta de Isabella" { 
+      assert.equals(1200, marta.precioPor(fiestaIsabella)) 
+    }
+    test "Marta cobra 2880 por la fiesta de Damián" { 
+      assert.equals(2880, marta.precioPor(fiestaDamian)) 
+    }
+    test "Eliana cobra 7200 por la fiesta de Damián" { 
+      assert.equals(7200, eliana.precioPor(fiestaDamian)) 
+    }
+    test "Los Pibes cobran 800 por la fiesta de Isabella" { 
+      assert.equals(800, losPibes.precioPor(fiestaIsabella)) 
+    }
+    test "Dodain cobra 4800 por la fiesta de Damián" { 
+      assert.equals(4800, dodain.precioPor(fiestaDamian)) 
+    }
+    test "Escudo cobra 200 por la fiesta de Isabella" { 
+      assert.equals(200, escudo.precioPor(fiestaIsabella)) 
+    }
+    test "Escudo cobra 220 por la fiesta de Milena" { 
+      assert.equals(220, escudo.precioPor(fiestaMilena)) 
+    }
+}
+ describe "Agencia" {
+  const agencia  = fixtureCompartido.nuevaAgencia()
+  const isabella  = fixtureCompartido.nuevaIsabella()
+  const milena    = fixtureCompartido.nuevaMilena()
+  const damian    = fixtureCompartido.nuevoDamian()
+   test "Isabella puede pagar a Doña Rosa, ElBod, Marta, LosPibes, Dodain, Escudo y Silvina" {
+     assert.equals(#{doniaRosa, elBodegon, marta, losPibes, dodain, escudo, silvina}, 
+        agencia.costoProveedor(isabella).asSet())
+   }
+   test "Milena puede pagar a Escudo y Silvina" {
+     assert.equals([escudo, silvina], agencia.costoProveedor(milena))
+   }
+   test "Damian puede pagar a todos" {
+     assert.equals(#{losTilos, marta, eliana, losPibes, dodain, escudo, silvina, elBodegon, doniaRosa, pizzasNico}, 
+               agencia.costoProveedor(damian).asSet())
+   }
+   test "La agencia desvincula a Sivina. Milena solo puede pagar a Escudo" {
+     agencia.desvincularProveedor(silvina)
+      assert.equals([escudo], agencia.costoProveedor(milena))
+   }
+}
+ describe "Clientes" {
+     const isabella = fixtureCompartido.nuevaIsabella()
+     const milena   = fixtureCompartido.nuevaMilena()
+     const damian   = fixtureCompartido.nuevoDamian()   
+     const tomas    = fixtureCompartido.nuevoTomas()
+
+   test "Isabella contrata a Escudo" {
+     isabella.contratarProveedor(escudo)
+     assert.equals(1530, isabella.presupuesto())
+   }
+
+   test "Isabella contrata Escudo y a El Bodegon"{
+     isabella.contratarProveedor(escudo)
+     isabella.contratarProveedor(elBodegon)
+     assert.equals(1695, isabella.cantidadGastada())
+     assert.equals(2, isabella.cantidadDeServiciosContratados())   
+   }
+   test "Isabella intenta contrar a Los Tilos y no puede"{
+     assert.throwsExceptionWithMessage("Presupuesto insuficiente", {isabella.contratarProveedor(losTilos)})
+     assert.equals(2750, isabella.ahorro())
+   }
+
+   test "Isabella contrata a Escudo y a El Bodegon. No es derrochona"{
+     isabella.contratarProveedor(escudo)
+     isabella.contratarProveedor(elBodegon)
+     assert.notThat(isabella.esDerrochon())
+   }
+   test "Isabella ahorra $5000 y contrata a Los Tilos. Es derrochona"{
+     isabella.ahorra(5000)
+     isabella.contratarProveedor(losTilos)
+     assert.that(isabella.esDerrochon())
+   }
+
+   test "Damian contrata a Los Tilos" {
+     damian.contratarProveedor(losTilos)
+     assert.equals(16000, damian.cantidadGastada())
+     assert.notThat(damian.esDerrochon())
+   }
+
+   test "Tomas comtrata a Los Tilos" {
+     tomas.contratarProveedor(losTilos)
+     assert.equals(4000, tomas.cantidadGastada())
+     assert.that(tomas.esDerrochon())
+   }
+
+   test "Milena ahorra $100000 y contrata a Los Tilos. Es derrochona" {
+     milena.ahorra(100000)
+     milena.contratarProveedor(losTilos)
+     assert.that(milena.esDerrochon())
+   }
+
+   test "Milena ahorra $100000, contrata dos veces a Silvina y dos veces a Escudo" {
+     milena.ahorra(100000)
+     milena.contratarProveedor(silvina)
+     milena.contratarProveedor(silvina)
+     milena.contratarProveedor(escudo)
+     milena.contratarProveedor(escudo)
+     assert.equals(4, milena.cantidadDeServiciosContratados())
+     assert.equals(2, milena.proveedoresContratados().size())
+   }
+}
+ describe "Regresion TP1" {
+   const isabella = fixtureCompartido.nuevaIsabella()
+
+   method puedeContratar(proveedor){
+    const fiesta = fixtureCompartido.nuevaFiestaIsabella()
+    return proveedor.precioPor(fiesta) <= isabella.presupuesto()
+   }
+   test "El barril cuesta $500. Isabella no contrata a Doña Rosa" {
+    barril.precioBebida(500)
+    assert.notThat(self.puedeContratar(doniaRosa))
+  }
+
+  test "Isabella ahorra $2000.Puede contratar a Pizzas Nico" {
+    isabella.ahorra(2000)
+    assert.that(self.puedeContratar(pizzasNico))
+  }
+}

@@ -1,0 +1,115 @@
+import tp1.*
+describe "La bebida" {
+
+  test "Barriles necesarios para 81 invitados" {
+    assert.equals(3, barril.barrilesPara(81))
+  }
+
+  test "Barriles necesarios para 80 invitados" {
+    assert.equals(2, barril.barrilesPara(80))
+  }
+
+   test "Barriles necesarios para 79 invitados" {
+    assert.equals(2, barril.barrilesPara(79))
+  }
+
+  test "Costo barriles para 10 invitados" {
+    assert.equals(300, barril.costoBebida(10))
+  }
+   test "Costo barriles para 80 invitados" {
+    assert.equals(600, barril.costoBebida(80))
+  }
+ 
+}
+
+describe "Doña Rosa" {
+  test "Cobra de servicio 800 por 40 invitados" {
+    assert.equals(800, doniaRosa.costoServicio(40))
+  }
+  test "Doña Rosa cobra en total 1100 por 40 invitados" {
+    assert.equals(1100, doniaRosa.precioPor(40))
+  }
+}
+
+describe "El bodegon"{
+
+  test "cobro por 20 invitados"{
+    assert.equals(900, elBodegon.precioPor(20))
+  }
+
+  test "cobro por 30 invitados "{
+    assert.equals(1075,elBodegon.precioPor(30))
+  }
+}
+
+describe "Sectores"{
+  test "cantidad de invitados para sector familiar"{
+    assert.equals(24, sectorFamilia.cantidadInvitados())
+  }
+
+  test "cantidad de invitados para sector facultad"{
+    assert.equals(18, sectorFacultad.cantidadInvitados())
+  }
+}
+
+describe "Pizzas Nico" {
+  test "cobro por 42 invitados" {
+    assert.equals(1750, pizzasNico.costoServicio(42))
+  }
+
+  test "cobro por 40 invitados" {
+    assert.equals(1400, pizzasNico.costoServicio(40))
+  }
+
+  test "cobro total por 40 invitados" {
+    assert.equals(1700, pizzasNico.precioPor(40))
+  }
+}
+
+describe "Isabella" {
+  test "invitados en la fiesta" {
+    assert.equals(42, isabella.cantidadInvitados())
+  }
+
+  test "presupuesto maximo" {
+    assert.equals(1650, isabella.presupuestoMaximo())
+  }
+
+  test "contrata a Doña Rosa" {
+    assert.that(isabella.contrataCatering(doniaRosa))
+  }
+
+  test "contrata a Doña Rosa con el barril costando $500" {
+    barril.precioBebida(500)
+    assert.notThat(isabella.contrataCatering(doniaRosa))
+  }
+
+  test "contrata el Bodegon con el barril constando $500" {
+    barril.precioBebida(500)
+    assert.that(isabella.contrataCatering(elBodegon))
+  }
+
+  test "contrata a Doña Rosa con el barril a $500 y mas de $2000 de ahorro " {
+    barril.precioBebida(500)
+    isabella.ahorrar(2000)
+    assert.notThat(isabella.contrataCatering(doniaRosa))
+  }
+
+  test "contrata a El Bodegon" {
+    assert.that(isabella.contrataCatering(elBodegon))
+  }
+
+  test "contrata a Pizzas Nico" {
+    assert.notThat(isabella.contrataCatering(pizzasNico))
+  }
+
+  test "contrata a Pizzas Nico con mas de $1000 de ahorro" {
+    isabella.ahorrar(1000)
+    assert.notThat(isabella.contrataCatering(pizzasNico))
+  }
+
+ /* test "contrata a Pizzas Nico con mas de $2000 de ahorro" {
+    isabella.ahorrar(2000)
+    assert.that(isabella.contrataCatering(pizzasNico))
+  }*/
+}
