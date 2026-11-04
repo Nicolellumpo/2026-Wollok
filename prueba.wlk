@@ -10,4 +10,17 @@ object pepita2 {
     method comer(gramos) { energia = energia + 4 * gramos } 
 } 
 
+class Proveedores{
+ 
+  method precioBase() =  2
+  
+}
+ class Salon inherits Proveedores {
+  override method precioBase()= super()* 4
+ }
+
+// eAl usar self.PrecioBase() va entrar en loop, ya que va llamar recursivamente su propio metodo
+  class Salon2 inherits Proveedores {
+  override method precioBase()= self.precioBase()* 4
+ }
 

@@ -210,23 +210,29 @@ class Agencia {
 }
 
 object fixtureCompartido {
+  method mesa(mesas, invitados) = new SectorPorMesa
+    (mesas = mesas , invitadosPorMesa = invitados)
+
+  method grupo(grupos, integrantes, acompaniantes) = new SectorPorGrupos 
+    (grupos = grupos,integrantesPorGrupo = integrantes, acompaniantesPorGrupo = acompaniantes )
+
   method nuevaFiestaIsabella() = new Fiesta(sectores = [
-                                  new SectorPorGrupos(grupos = 3, integrantesPorGrupo = 4, acompaniantesPorGrupo = 2), 
-                                  new SectorPorMesa(mesas = 6, invitadosPorMesa = 4)] , 
+                                  self.grupo(3, 4, 2), 
+                                  self.mesa (6, 4)] , 
                                   duracion = 4) 
   method nuevaFiestaMilena() = new Fiesta(sectores = [
-                                  new SectorPorMesa(mesas = 3, invitadosPorMesa = 4),
-                                  new SectorPorGrupos(grupos = 2, integrantesPorGrupo = 3, acompaniantesPorGrupo = 1)] , 
+                                  self.mesa (3,4),
+                                  self.grupo (2, 3,1)] , 
                                   duracion = 6) 
   method nuevaFiestaDamian() = new Fiesta(sectores = [
-                                  new SectorPorMesa(mesas = 6, invitadosPorMesa = 5),
-                                  new SectorPorMesa(mesas = 5, invitadosPorMesa = 4),
-                                  new SectorPorGrupos(grupos = 2, integrantesPorGrupo = 5, acompaniantesPorGrupo = 0),
-                                  new SectorPorGrupos(grupos = 4, integrantesPorGrupo = 2, acompaniantesPorGrupo = 2)] , 
+                                  self.mesa(6,5),
+                                  self.mesa(5,4),
+                                  self.grupo (2, 5,0), 
+                                  self.grupo (4, 2,1)],
                                   duracion = 8) 
   method NuevaFiestaTomas() = new Fiesta(sectores = [
-                                  new SectorPorMesa(mesas = 6, invitadosPorMesa = 4), 
-                                  new SectorPorGrupos(grupos = 3, integrantesPorGrupo = 4, acompaniantesPorGrupo = 2)] , 
+                                  self.mesa(6,4),
+                                  self.grupo (3, 4,2)] , 
                                   duracion = 4) 
 
   method nuevaIsabella() = new Cliente(ahorro = 2750, porcentajePresupuesto = 0.6, fiesta = self.nuevaFiestaIsabella())
