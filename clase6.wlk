@@ -69,7 +69,9 @@ class Tarea {
 
 	var property complejidad = complejidadMinima
 	var property tiempo
-	const impuestos = #{}
+	const impuestos = #{} 
+	// si ponemos un solo numero no seria tan representativo
+	// esta bien q solo puede tner un impuesto, pero si queremos q tenga varios impuestos, podemos poner un set de impuestos
 
 	method agregarImpuesto(impuesto) {
 		impuestos.add(impuesto)
